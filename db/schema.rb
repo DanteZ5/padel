@@ -10,10 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312093037) do
+ActiveRecord::Schema.define(version: 20180312105441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "divisions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "match_teams", force: :cascade do |t|
+    t.bigint "match_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_match_teams_on_match_id"
+    t.index ["team_id"], name: "index_match_teams_on_team_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "date"
+    t.string "score"
+    t.string "winning_team"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.integer "score"
+    t.integer "played"
+    t.integer "rank"
+    t.bigint "division_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["division_id"], name: "index_teams_on_division_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +62,18 @@ ActiveRecord::Schema.define(version: 20180312093037) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone"
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "team_id"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "match_teams", "matches"
+  add_foreign_key "match_teams", "teams"
+  add_foreign_key "teams", "divisions"
+  add_foreign_key "users", "teams"
 end
