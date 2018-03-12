@@ -1,0 +1,25 @@
+<div class="container">
+<h1>Players</h1>
+
+  <div>
+    <table class="table players">
+      <tr>
+        <th>ID</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>email</th>
+        <th>Tel</th>
+      </tr>
+      <% @players.each do |player| %>
+      <tr>
+        <th><%= player.id %></th>
+        <td><%= player.first_name %></td>
+        <td><%= player.last_name %></td>
+        <td><%= player.email %></td>
+        <td><%= player.phone %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
