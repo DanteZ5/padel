@@ -9,14 +9,22 @@
         <th>Nom</th>
         <th>email</th>
         <th>Tel</th>
+        <th>Join</th>
       </tr>
       <% @players.each do |player| %>
-      <tr>
+      <tr class = "players">
         <th><%= player.id %></th>
         <td><%= player.first_name %></td>
         <td><%= player.last_name %></td>
         <td><%= player.email %></td>
         <td><%= player.phone %></td>
+        <% if current_user.team_id.nil? %>
+          <td><%= link_to 'join', teams_path(player), method: :post %></td>
+        <% elsif current_user.team_id == player.team_id %>
+          <td><%= link_to 'cancel', team_path(player), method: :patch %> </td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
       <% end %>
     </table>

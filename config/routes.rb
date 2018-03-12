@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get 'teams/create'
+
   root to: 'pages#home'
   get 'players/index'
 
   get 'pages/home'
 
-  resources :players, only: [:index]
+  resources :players, only: [:index] do
+    member do
+      resources :teams, only: [:create, :update]
+    end
+  end
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

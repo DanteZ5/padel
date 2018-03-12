@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "cleaning database"
+User.destroy_all
+Team.destroy_all
+
+puts "creating users"
+20.times do
+  User.create!( email: Faker::Internet.email, first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name, password: "1234", phone: Faker::Number.number(10))
+end
+
+puts "seed done!"
