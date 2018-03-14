@@ -13,12 +13,14 @@
         <th>Name</th>
         <th>Teams</th>
         <th>Watch teams</th>
+        <th>Generator</th>
       </tr>
       <% @divisions.each do |division| %>
       <tr>
         <td><%= division.name %></td>
         <td><%= Team.where(division_id: division.id).size %></td>
         <td><%= link_to 'watch', teams_index_division_division_path(division) %></td>
+        <td><%= link_to 'generate', division_generator_path(division), method: :post  %></td>
       </tr>
       <% end %>
     </table>

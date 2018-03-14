@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :players, only: [:index, :show] do
     member do
-      patch 'teams/asking', method: :patch
+      patch 'teams/asking', method: :patch # voir si method est useless
       patch 'teams/refused', method: :patch
       patch 'teams/accept', method: :patch
     end
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :divisions, only: [:index, :create, :destroy]  do
+    post 'generator'
     member do
       get 'teams/index_division'
     end
