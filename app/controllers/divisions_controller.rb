@@ -24,14 +24,18 @@ class DivisionsController < ApplicationController
 
   def generator
     teams = Team.where(division_id: params[:division_id])
-
+    i = 0
     unless teams.count < 2
       teams.each do |team1|
         teams.each do |team2|
           unless (team1 == team2)
-            match = Match.create
-            MatchTeam.create(match_id: match.id, team_id: team1.id)
+            if i % 2 == 0
+              match = Match.create
+            else
+              match = Match.last
+            end
             MatchTeam.create(match_id: match.id, team_id: team2.id)
+            i += 1
           end
         end
       end
