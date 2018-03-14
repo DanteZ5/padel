@@ -8,6 +8,8 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.1.5'
 gem 'redis'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap'

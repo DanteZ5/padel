@@ -1,16 +1,15 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <%= link_to 'home', root_path, class: "navbar-wagon-brand navbar-wagon-link" %>
-
-  <%= "#{current_user.first_name} #{current_user.last_name}" %>
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Players", players_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Disconnect", destroy_user_session_path,  method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "#{current_user.first_name}", player_path(current_user), class: "navbar-wagon-item navbar-wagon-link"  %>
+      <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Deconnecter", destroy_user_session_path,  method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
 
     <% else %>
       <!-- Login link (when logged out) -->

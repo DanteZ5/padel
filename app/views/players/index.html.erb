@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Players</h1>
+<h1>Joueurs seuls</h1>
 
   <div>
     <table class="table players">
@@ -7,22 +7,32 @@
         <th>ID</th>
         <th>Prénom</th>
         <th>Nom</th>
-        <th>email</th>
+
         <th>Tel</th>
-        <th>Join</th>
+        <th>Rejoindre</th>
+        <th>Valider</th>
       </tr>
       <% @players.each do |player| %>
-      <tr class = "players">
-        <th><%= player.id %></th>
+
+
+        <tr class = "players">
+
+        <td><%= player.id %></td>
         <td><%= player.first_name %></td>
         <td><%= player.last_name %></td>
-        <td><%= player.email %></td>
+
         <td><%= player.phone %></td>
         <% if current_user.team_id.nil? %>
-          <td><%= link_to 'join', teams_path(player), method: :post %></td>
-        <% elsif current_user.team_id == player.team_id %>
-          <td><%= link_to 'cancel', team_path(player), method: :patch %> </td>
+          <td><%= link_to 'joindre', teams_asking_player_path(player), method: :patch %></td>
+          <td></td>
+        <% elsif !current_user.receiver && current_user.team_id == player.team_id %>
+          <td><%= link_to 'annuler', teams_refused_player_path(player), method: :patch %> </td>
+          <td></td>
+        <% elsif current_user.receiver && current_user.team_id == player.team_id %>
+          <td><%= link_to 'refuser', teams_refused_player_path(player), method: :patch %> </td>
+          <td><%= link_to 'accepter', teams_accept_player_path(player), method: :patch %></td>
         <% else %>
+          <td></td>
           <td></td>
         <% end %>
       </tr>

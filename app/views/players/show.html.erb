@@ -1,0 +1,9 @@
+<div class="container">
+  <h1><%= "#{@player.first_name} #{@player.last_name}" %></h1>
+  <% if Team.find(@player.team_id).accepted %>
+    <% u = User.where(team_id: @player.team_id) - [@player] %>
+    <% u = u[0] %>
+    <h3>your partner is : <%= "#{u.first_name} #{u.last_name}" %></h3>
+  <% end %>
+
+</div>

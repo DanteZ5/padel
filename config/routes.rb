@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  get 'teams/create'
-
   root to: 'pages#home'
-  get 'players/index'
 
   get 'pages/home'
 
-  resources :players, only: [:index] do
+  resources :players, only: [:index, :show] do
     member do
-      resources :teams, only: [:create, :update]
+      patch 'teams/asking', method: :patch
+      patch 'teams/refused', method: :patch
+      patch 'teams/accept', method: :patch
     end
   end
 

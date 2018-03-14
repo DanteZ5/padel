@@ -1,18 +1,24 @@
 class TeamsController < ApplicationController
-  def create
+  def asking
     team = Team.new()
     team.save
-    current_user.update(team_id: team.id)
+    current_user.update(team_id: team.id, receiver: false)
     player2 = User.find(params[:id])
-    player2.update(team_id: team.id)
-    redirect_to players_index_path
+    player2.update(team_id: team.id, receiver: true)
+    redirect_to players_path
   end
 
-  def update
-    current_user.update(team_id: nil)
+  def refused
+    current_user.update(team_id: nil, receiver: nil)
     player = User.find(params[:id])
-    player.update(team_id: nil)
-    redirect_to players_index_path
+    player.update(team_id: nil, receiver: nil)
+    redirect_to players_path
+  end
+
+  def accept
+    team = Team.find(current_user.team_id)
+    team.update(accepted: true)
+    redirect_to players_path
   end
 
   # private
