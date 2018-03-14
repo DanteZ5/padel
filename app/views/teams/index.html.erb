@@ -1,0 +1,51 @@
+<div class="container">
+  <% if current_user.admin %>
+    <div style= "margin: 10px 0">
+      <h1> Toutes les équipes </h1>
+      <%= link_to "New Team", new_team_path, class: "btn btn-primary" %>
+    </div>
+    <div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+        <th>Played</th>
+        <th>Rank</th>
+        <th>Division</th>
+        <th>Revoke</th>
+      </tr>
+      <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.score %></td>
+        <td><%= team.played %></td>
+        <td><%= team.rank %></td>
+
+        <% if team.division_id.nil? && team.accepted %>
+          <td>
+          <div class="form form-inline">
+            <%= simple_form_for team, url: team_path(team), method: :patch do |f| %>
+            <%= f.input :division_id, collection: @divisions, label: false %>
+            <%= f.submit "confirm", class: "btn btn-primary" %>
+          <% end %>
+          </div>
+          </td>
+        <% elsif !team.accepted %>
+          <td></td>
+        <% else %>
+          <td><%= team.division.name %></td>
+        <% end %>
+
+        <td><%= link_to 'revoke', team_path(team), method: :delete, data: { confirm: "Are you sure ?" }  %></td>
+
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <% else %>
+    <h2>You've nothing to do here, buddy</h2>
+  <% end %>
+
+</div>

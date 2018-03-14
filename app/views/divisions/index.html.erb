@@ -1,0 +1,29 @@
+<div class="container">
+  <div style= "margin: 10px 0">
+    <h1> Divisions </h1>
+  <% if current_user.admin %>
+    <%= link_to "Add a division", divisions_path, method: :post, class: "btn btn-primary" %>
+    <% unless Division.count == 0 %>
+      <%= link_to "Delete last division", division_path(Division.last.id), method: :delete, data: { confirm: "ATTENTION, vous êtes sur le points de supprimer la #{Division.last.name} : les équipes se retrouveront sans division et les matchs seront détruits !" }, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+  <div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Teams</th>
+        <th>Watch teams</th>
+      </tr>
+      <% @divisions.each do |division| %>
+      <tr>
+        <td><%= division.name %></td>
+        <td><%= Team.where(division_id: division.id).size %></td>
+        <td><%= link_to 'watch', teams_index_division_division_path(division) %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <% else %>
+    <h1>You've nothing to do here, buddy, you're not admin</h1>
+  <% end %>
+</div>

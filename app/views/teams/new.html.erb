@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>New team</h1>
+  <%= simple_form_for @team do |f| %>
+  <%= f.input :player_1, collection: @players, label_method: :fullname, value_method: :id, label: "Joueur 1" %>
+  <%= f.input :player_2, collection: @players, label_method: :fullname, value_method: :id, label: "Joueur 2" %>
+  <%= f.submit "valid", class: "btn btn-primary" %>
+  <% end %>
+</div>

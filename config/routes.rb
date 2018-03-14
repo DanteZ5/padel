@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
 
-  get 'pages/home'
-
   resources :players, only: [:index, :show] do
     member do
       patch 'teams/asking', method: :patch
@@ -11,9 +9,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :teams
+
+  resources :divisions, only: [:index, :create, :destroy]  do
+    member do
+      get 'teams/index_division'
+    end
+  end
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

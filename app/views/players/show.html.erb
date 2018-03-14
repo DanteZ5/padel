@@ -1,9 +1,16 @@
 <div class="container">
-  <h1><%= "#{@player.first_name} #{@player.last_name}" %></h1>
-  <% if Team.find(@player.team_id).accepted %>
+  <h1><%= @player.fullname %></h1>
+
+
+  <% if @player.team_id.nil? %>
+    <h3><%= link_to "trouve un partenaire", players_path %></h3>
+  <% elsif !Team.find(@player.team_id).accepted  %>
+    <h3>En attente de validation</h3>
+    <p><%= link_to "consuler les joueurs", players_path %></p>
+  <% else %>
     <% u = User.where(team_id: @player.team_id) - [@player] %>
     <% u = u[0] %>
-    <h3>your partner is : <%= "#{u.first_name} #{u.last_name}" %></h3>
+    <h3>Ton partenaire est : <%= u.fullname %></h3>
   <% end %>
-
+  <%= link_to "Logout", destroy_user_session_path,  method: :delete %>
 </div>
