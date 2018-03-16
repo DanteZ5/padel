@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     post 'generator'
     delete 'destructor'
     member do
+      resources :matches
       get 'teams/index_division'
     end
   end
