@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :divisions, only: [:index, :create, :destroy]  do
     post 'generator'
+    delete 'destructor'
     member do
       get 'teams/index_division'
     end

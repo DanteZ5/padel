@@ -22,6 +22,16 @@ class DivisionsController < ApplicationController
     redirect_to divisions_path
   end
 
+  def destructor
+    teams = Team.where(division_id: params[:division_id])
+    match_teams = MatchTeam.where(team_id: teams.ids)
+    match_ids = match_teams.map { |mt| mt.match_id }
+    matchs = Match.where(id: match_ids)
+    match_teams.destroy_all
+    matchs.destroy_all
+    redirect_to divisions_path
+  end
+
   def generator
     teams = Team.where(division_id: params[:division_id])
     i = 0
