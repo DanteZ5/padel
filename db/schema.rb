@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314171003) do
+ActiveRecord::Schema.define(version: 20180328150943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,21 +21,14 @@ ActiveRecord::Schema.define(version: 20180314171003) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "match_teams", force: :cascade do |t|
-    t.bigint "match_id"
-    t.bigint "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["match_id"], name: "index_match_teams_on_match_id"
-    t.index ["team_id"], name: "index_match_teams_on_team_id"
-  end
-
   create_table "matches", force: :cascade do |t|
     t.string "date"
     t.string "score"
     t.string "winning_team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_1_id"
+    t.integer "team_2_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -46,7 +39,6 @@ ActiveRecord::Schema.define(version: 20180314171003) do
     t.bigint "division_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", default: "pending"
     t.boolean "accepted", default: false
     t.index ["division_id"], name: "index_teams_on_division_id"
   end
@@ -76,8 +68,6 @@ ActiveRecord::Schema.define(version: 20180314171003) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
-  add_foreign_key "match_teams", "matches"
-  add_foreign_key "match_teams", "teams"
   add_foreign_key "teams", "divisions"
   add_foreign_key "users", "teams"
 end

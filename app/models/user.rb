@@ -12,9 +12,19 @@ class User < ApplicationRecord
   def full_name
     self.fullname = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
   end
+
   def self.validation
     users = User.all.select do |user|
       Team.find(user.team_id).accepted == true unless user.team_id.nil?
     end
+  end
+
+  def find_my_matches
+    my_team_id = self.team_id
+    return matches = Match.where(team_1_id: my_team_id)
+    # team_id = self.team_id
+    # match_teams = MatchTeam.where(team_id: team_id)
+    # match_ids = match_teams.map { |mt| mt.match_id }
+    # return Match.where(id: match_ids)
   end
 end

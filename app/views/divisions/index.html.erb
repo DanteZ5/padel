@@ -24,7 +24,7 @@
         <% teams = Team.where(division_id: division.id)  %>
         <% if teams.count < 2 %>
           <td></td>
-        <% elsif MatchTeam.where(team_id: teams.ids).count == 0  %>
+        <% elsif Match.where(team_1_id: teams.ids).count == 0  %>
           <td><%= link_to 'generate', division_generator_path(division), method: :post  %></td>
         <% else %>
           <td><%= link_to 'reinitialize', division_destructor_path(division), method: :delete, data: { confirm: "ATTENTION, tous les matchs associés à cette division seront détruits"} %></td>

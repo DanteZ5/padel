@@ -8,13 +8,14 @@
     <!-- Links when User is logged in -->
     <% if user_signed_in? && !current_user.admin %>
 
+      <%= link_to "Reporter un match", matches_report_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "#{current_user.first_name}", player_path(current_user), class: "navbar-wagon-item navbar-wagon-link"  %>
 
      <!-- Links when Admin is logged in -->
-    <% elsif user_signed_in? && current_user.admin %>
-
-      <%= link_to "Teams", teams_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <% elsif user_signed_in?  %>
+      <%= link_to "Reporter un match", matches_report_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Équipes", teams_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Divisions", divisions_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "#{current_user.first_name}", player_path(current_user), class: "navbar-wagon-item navbar-wagon-link"  %>

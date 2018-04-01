@@ -15,10 +15,12 @@ Rails.application.routes.draw do
     post 'generator'
     delete 'destructor'
     member do
-      resources :matches
+      resources :matches, only: [:index] # not sure it's necessary
       get 'teams/index_division'
     end
   end
+
+  get 'matches/report'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'
