@@ -7,5 +7,24 @@ class MatchesController < ApplicationController
   def report
     @team_id = current_user.team_id
     @matches = current_user.find_my_matches
+    @match = Match.new
   end
+
+  def edit
+    @match = Match.find(params[:id])
+  end
+
+  def update
+    @match = Match.find(params[:id])
+    if @match.update(matches_params)
+      redirect_to matches_report_path
+    end
+  end
+
+  private
+
+  def matches_params
+    params.require(:match).permit(:date, :score, :winning_team, :team_1_id, :team_2_id)
+  end
+
 end

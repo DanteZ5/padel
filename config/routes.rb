@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :matches, only: [:edit, :update]
   get 'matches/report'
 
   devise_for :users, controllers: {

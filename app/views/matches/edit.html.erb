@@ -1,0 +1,9 @@
+<div class="container">
+  <br /><p> id du match : <%= @match.id %></p>
+  <%= simple_form_for @match do |f| %>
+    <%= f.input :date %>
+    <%= f.input :score %>
+    <%= f.input :winning_team %>
+    <%= f.submit "valider"%>
+  <% end %>
+</div>

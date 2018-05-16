@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Teams</th>
         <th>Watch teams</th>
+        <th>Consult matches</th>
         <th>Magic</th>
       </tr>
       <% @divisions.each do |division| %>
@@ -20,6 +21,8 @@
         <td><%= division.name %></td>
         <td><%= Team.where(division_id: division.id).size %></td>
         <td><%= link_to 'watch', teams_index_division_division_path(division) %></td>
+        <td><%= link_to 'consult', matches_path(division) %></td>
+
 
         <% teams = Team.where(division_id: division.id)  %>
         <% if teams.count < 2 %>

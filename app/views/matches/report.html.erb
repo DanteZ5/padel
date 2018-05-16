@@ -1,9 +1,15 @@
 <div class="container">
   <h1>Report de match</h1>
   <% if @team_id.nil? %>
-      Vous n'êtes pas actif dans la ligue, pas de report possible
+    Vous n'êtes pas actif dans la ligue, pas de report possible
   <% else %>
-      Quelle rencontre souhaitez vous reporter ?
+    Quelle rencontre souhaitez vous reporter ?
+    <% @matches.each do |match|%>
+    <% team = Team.find(match.team_2_id)%>
+    <div><%= link_to team.name, edit_match_path(match) %></div>
+    <% end %>
+
+
 
   <% end %>
 </div>

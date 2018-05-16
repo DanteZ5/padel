@@ -8,9 +8,10 @@ class Division < ApplicationRecord
 
   def find_matches
     teams = Team.where(division_id: self.id)
-    match_teams = MatchTeam.where(team_id: teams.ids)
-    match_ids = match_teams.map { |mt| mt.match_id }
-    return Match.where(id: match_ids)
+    # matches = Match.where(team_1_id: my_team_id)
+    matches = Match.where(team_1_id: teams.ids)
+    # match_ids = match_teams.map { |mt| mt.match_id }
+    # return Match.where(id: match_ids)
   end
 
 end
