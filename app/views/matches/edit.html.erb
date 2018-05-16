@@ -3,7 +3,7 @@
   <%= simple_form_for @match do |f| %>
     <%= f.input :date %>
     <%= f.input :score %>
-    <%= f.input :winning_team %>
+    <%= f.input :winning_team, collection: [@match.team_1_id, @match.team_2_id] %>
     <%= f.submit "valider"%>
   <% end %>
 </div>
