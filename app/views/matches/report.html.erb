@@ -5,8 +5,10 @@
   <% else %>
     Quelle rencontre souhaitez vous reporter ?
     <% @matches.each do |match|%>
-    <% team = Team.find(match.team_2_id)%>
-    <div><%= link_to team.name, edit_match_path(match) %></div>
+    <% team1 = Team.find(match.team_1_id)%>
+    <% team2 = Team.find(match.team_2_id)%>
+    <% rencontre = "#{team1.name} VS #{team2.name}" %>
+    <div><%= link_to rencontre, edit_match_path(match) %></div>
     <% end %>
 
 

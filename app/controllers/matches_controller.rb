@@ -24,6 +24,7 @@ class MatchesController < ApplicationController
   private
 
   def matches_params
+    params[:match][:winning_team] = Team.find_by_name(params[:match][:winning_team]).id
     params.require(:match).permit(:date, :score, :winning_team, :team_1_id, :team_2_id)
   end
 

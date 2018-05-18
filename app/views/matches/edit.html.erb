@@ -3,7 +3,11 @@
   <%= simple_form_for @match do |f| %>
     <%= f.input :date %>
     <%= f.input :score %>
-    <%= f.input :winning_team, collection: [@match.team_1_id, @match.team_2_id] %>
+    <%= f.input :winning_team, collection: [Team.find(@match.team_1_id).name, Team.find(@match.team_2_id).name], selected: Team.find(@match.team_2_id).name %>
+
+
+
+    <%#= f.input :winning_team, collection: State.all, :required => true, label: t('content.realty.state'), value_method: :name %>
     <%= f.submit "valider"%>
   <% end %>
 </div>

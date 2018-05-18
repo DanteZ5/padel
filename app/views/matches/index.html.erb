@@ -1,6 +1,26 @@
 <div class="container">
   <h1>Matches</h1>
-  <% @matches.each do |match| %>
-    <%= match.id %>
-  <% end %>
+
+
+  <div>
+    <table class="table">
+      <tr>
+        <th>Team 1</th>
+        <th>Team 2</th>
+        <th>Vainqueur</th>
+        <th>Score</th>
+        <th>Date</th>
+      </tr>
+      <% @matches.each do |match| %>
+      <tr>
+        <td><%= Team.find(match.team_1_id).name %></td>
+        <td><%= Team.find(match.team_2_id).name %></td>
+        <td><%= Team.find(match.winning_team).name unless match.winning_team.nil? %></td>
+        <td><%= match.score %></td>
+        <td><%= match.date %></td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

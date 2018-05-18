@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def find_my_matches
     my_team_id = self.team_id
-    return matches = Match.where(team_1_id: my_team_id)
+    return matches = Match.where(team_1_id: my_team_id) + Match.where(team_2_id: my_team_id)
     # team_id = self.team_id
     # match_teams = MatchTeam.where(team_id: team_id)
     # match_ids = match_teams.map { |mt| mt.match_id }
